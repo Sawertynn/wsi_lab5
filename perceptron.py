@@ -1,9 +1,9 @@
 import numpy as np
 
 
-def laplace(x, mu = 0, b = 1):
-    #TODO: Implement Laplace distribution
-    pass
+def laplace(x, mu=0, b=1):
+    return (1 / (2 * b)) * np.exp(-np.abs(x - mu) / b)
+
 
 class Perceptron_2_layers:
     def __init__(self, hidden_size):
