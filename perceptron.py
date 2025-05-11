@@ -24,9 +24,8 @@ class Perceptron_2_layers:
         # TO DO: Implement forward propagation
         pass
 
-    def compute_loss(self, y_pred, y_true):
-        # TO DO: Implement loss computation
-        pass
+    def MSE(self, y_true, y_pred):
+        return np.mean((y_true - y_pred) ** 2)
 
     def backward_propagation(self, x, y, learning_rate):
         # TO DO: Implement backward propagation
