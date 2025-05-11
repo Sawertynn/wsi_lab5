@@ -8,7 +8,14 @@ def laplace(x, mu=0, b=1):
 class Perceptron_2_layers:
     def __init__(self, hidden_size):
         self.hidden_size = hidden_size
-        # TO DO: Initialize weights and biases
+
+        limit = 1 / np.sqrt(1)
+
+        self.weights_first_layer = np.random.uniform(-limit, limit, (1, hidden_size))
+        self.bias_first_layer = np.zeros((1, hidden_size))
+
+        self.weights_second_layer = np.zeros((hidden_size, 1))
+        self.bias_second_layer = np.zeros((1, 1))
 
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
