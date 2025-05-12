@@ -20,9 +20,12 @@ class Perceptron_2_layers:
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
 
-    def forward_propagation(self, x):
-        # TO DO: Implement forward propagation
-        pass
+    def forward_propagation(self,x):
+        output = x @ self.weights_first_layer + self.bias_first_layer
+        output = sigmoid(output)
+        output = output @ self.weights_second_layer + self.bias_second_layer
+
+        return output
 
     def MSE(self, y_true, y_pred):
         return np.mean((y_true - y_pred) ** 2)
