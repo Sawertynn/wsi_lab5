@@ -43,5 +43,4 @@ class Perceptron_2_layers:
                 print(f'Epoch {epoch}, MSE: {mse}')
 
     def predict(self, x):
-        # TO DO: Implement prediction
-        pass
+        return self.forward_propagation(x)
