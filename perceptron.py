@@ -21,11 +21,11 @@ class Perceptron_2_layers:
         return 1 / (1 + np.exp(-x))
 
     def forward_propagation(self,x):
-        output = x @ self.weights_first_layer + self.bias_first_layer
-        output = sigmoid(output)
-        output = output @ self.weights_second_layer + self.bias_second_layer
-
-        return output
+        self.hidden_layer = np.dot(x, self.weights_first_layer) + self.bias_first_layer
+        self.hidden_layer = self.sigmoid(self.hidden_layer)
+        self.output = np.dot(self.hidden_layer, self.weights_second_layer) + self.bias_second_layer
+        
+        return self.output
 
     def MSE(self, y_true, y_pred):
         return np.mean((y_true - y_pred) ** 2)
@@ -35,8 +35,12 @@ class Perceptron_2_layers:
         pass
 
     def train(self, x, y, epochs, learning_rate):
-        #To DO: Implement training loop
-        pass
+        for epoch in range(epochs):
+            self.forward_propagation(x)
+            self.backward_propagation(x, y, learning_rate);
+            if(epoch % 100) == 0:
+                mse = self.MSE(y,self.output)
+                print(f'Epoch {epoch}, MSE: {mse}')
 
     def predict(self, x):
         # TO DO: Implement prediction
