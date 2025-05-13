@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def laplace(x, mu=0, b=1):
@@ -35,7 +36,7 @@ class Perceptron_2_layers:
 
     def backward_propagation(self, x, y, learning_rate):
         output_error = self.output - y
-        delta_output = output_error  
+        delta_output = output_error
 
         delta_hidden = np.dot(delta_output, self.weights_second_layer.T) * self.sigmoid_derivative(self.hidden_layer)
         self.weights_second_layer -= np.dot(self.hidden_layer.T, delta_output) * learning_rate
@@ -54,3 +55,23 @@ class Perceptron_2_layers:
 
     def predict(self, x):
         return self.forward_propagation(x)
+
+
+if __name__ == "__main__":
+    x = np.linspace(-5, 5, 100).reshape(-1, 1)
+    y = laplace(x).reshape(-1, 1)
+
+    hidden_size = 5
+    learning_rate = 0.01
+    epochs = 100000
+    model = Perceptron_2_layers(hidden_size)
+    model.train(x, y, epochs, learning_rate)
+
+    y_pred = model.predict(x)
+
+    # plot the results
+    plt.plot(x, y, label='True')
+    plt.plot(x, y_pred, label='Predicted')
+    plt.legend()
+    plt.show()
+
