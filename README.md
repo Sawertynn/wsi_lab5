@@ -49,7 +49,7 @@ Uczenie odbywa się za pomocą **propagacji wstecznej (backpropagation)** i **gr
 
 ## Implementacja
 
-- Wagi pierwszej warstwy inicjalizowane są losowo z przedziału \( \left[ -\frac{1}{\sqrt{n}}, \frac{1}{\sqrt{n}} \right] \),
+- Wagi pierwszej warstwy inicjalizowane są losowo z przedziału [-1/sqrt(n), 1/sqrt(n)],
 - Wagi drugiej warstwy początkowo ustawiono na zero,
 - Dla stabilności uczenia zastosowano **normalizację danych wejściowych i wyjściowych** (średnia = 0, odchylenie standardowe = 1),
 - Funkcja aktywacji `sigmoid` oraz jej pochodna zostały zaimplementowane ręcznie,
