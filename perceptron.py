@@ -18,6 +18,11 @@ class Perceptron_2_layers:
         self.weights_second_layer = np.zeros((hidden_size, 1))
         self.bias_second_layer = np.zeros((1, 1))
 
+        self.x_mean = None
+        self.x_std = None
+        self.y_mean = None
+        self.y_std = None
+
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
 
@@ -46,15 +51,29 @@ class Perceptron_2_layers:
         self.bias_first_layer -= np.sum(delta_hidden, axis=0, keepdims=True) * learning_rate
 
     def train(self, x, y, epochs, learning_rate):
+        # Normalize the input data
+        self.x_mean = np.mean(x, axis=0)
+        self.x_std = np.std(x, axis=0)
+        x_norm = (x - self.x_mean) / self.x_std
+
+        # Normalizacja wyjścia
+        self.y_mean = np.mean(y, axis=0)
+        self.y_std = np.std(y, axis=0)
+        y_norm = (y - self.y_mean) / self.y_std
+
         for epoch in range(epochs):
-            self.forward_propagation(x)
-            self.backward_propagation(x, y, learning_rate)
+            self.forward_propagation(x_norm)
+            self.backward_propagation(x_norm, y_norm, learning_rate)
             if (epoch % 100) == 0:
-                mse = self.MSE(y,self.output)
+                mse = self.MSE(y_norm, self.output)
                 print(f'Epoch {epoch}, MSE: {mse}')
 
     def predict(self, x):
-        return self.forward_propagation(x)
+        x_norm = (x - self.x_mean) / self.x_std
+        y_pred_norm = self.forward_propagation(x_norm)
+
+        y_pred = y_pred_norm * self.y_std + self.y_mean
+        return y_pred
 
 
 if __name__ == "__main__":
