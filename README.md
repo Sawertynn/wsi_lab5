@@ -56,30 +56,38 @@ Uczenie odbywa się za pomocą **propagacji wstecznej (backpropagation)** i **gr
 - Zaimplementowano metodę `train()`, która wykonuje propagację w przód i wstecz przez określoną liczbę epok.
 
 
+## Parametry
+
+- liczba próbek = 100
+- rozmiary warstwy ukrytej: [4, 7, 10, 13, 20]
+- learning rate = 0.01
+- liczba epok: 50'000 - przy większych liczbach zasoby komputera były niewystarczające i liczenie zajmowało bardzo długo
+- liczba powtórzeń trenowania i predykcji: 5
+- testowane dla wariantu z normalizacją, dalej wariant bez normalizacji
+
 ## Testy i wyniki
 
 Dla każdego wybranego rozmiaru perceptron był testowany 5 razy, aby zminimalizować udział losowości przy przy tworzeniu sieci na początku.
 
 Wyniki błędów ze wszystkich prób:
 
-MSE
+mean square error
 | size | min | max |
 | -- | ------- | -------- |
-|  4 | 1.51e-05| 1.67e-03 |
-|  7 | 2.14e-05| 2.27e-04 |
-| 10 | 3.11e-04| 1.16e-02 |
-| 13 | 7.68e-05| 1.68e-04 |
-| 20 | 1.77e-04| 1.99e-04 |
+|  4 | 1.60e-05 | 1.69e-03 |
+|  7 | 1.84e-05 | 2.26e-04 |
+| 10 | 1.71e-05 | 1.16e-02 |
+| 13 | 7.74e-05 | 1.41e-04 |
+| 20 | 1.76e-04 | 2.01e-04 |
 
-
-MAE
+mean absolute error
 | size | min | max |
 | -- | ------- | -------- |
-|  4 | 1.51e-05 1.67e-03 |
-|  7 | 2.14e-05 2.27e-04 |
-| 10 | 3.11e-04 1.16e-02 |
-| 13 | 7.68e-05 1.68e-04 |
-| 20 | 1.77e-04 1.99e-04 |
+|  4 | 2.26e-03 | 4.04e-02 |
+|  7 | 2.72e-03 | 1.09e-02 |
+| 10 | 2.27e-03 | 7.64e-02 |
+| 13 | 5.91e-03 | 8.04e-03 |
+| 20 | 9.52e-03 | 1.02e-02 |
 
 
 ### Wykresy (dla najlepszego wyniku)
@@ -119,7 +127,7 @@ MAE
 
 Perceptron dwu warstwowy bardzo dobrze aproksymuje funkcję Laplace'a, już dla 4 neuronów na każdej warstwie wykres przewidywań jest zbliżony do oryginalnej funkcji.
 
-Normalizacja jest bardzo ważna, bez niej przy większych warstwach ukrytych warstwach jest ryzyko na problemy z liczeniem.
+Normalizacja jest bardzo ważna, bez niej przy większych warstwach ukrytych jest ryzyko na błędy w obliczeniach - występuje overflow na liczbach zmiennoprzecinkowych.
 
 Więcej neuronów dawało lepszy wynik w najgorszym wypadku i niewiele gorszy w wypadku najlepszym. Dla 20 neuronów widać jednak małe przeuczenie na wykresie.
 

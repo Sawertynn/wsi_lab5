@@ -103,7 +103,7 @@ if __name__ == "__main__":
     x = np.linspace(-5, 5, 100).reshape(-1, 1)
     y = laplace(x).reshape(-1, 1)
 
-    hidden_size = 10
+    hidden_size = 5
     learning_rate = 0.01
     epochs = 100_000
     model = Perceptron_2_layers(hidden_size)

@@ -70,7 +70,6 @@ def run_show(x, y, normalize=True):
     
     for size in SIZES:
         vals = maes[size]
-        # print(f'size: {size:2}, MAE: min {min(vals):.2e} max: {max(vals):.2e}')
         print(f'| {size:2} | {min(vals):.2e} | {max(vals):.2e} |')
 
 def main():
