@@ -54,3 +54,36 @@ Uczenie odbywa się za pomocą **propagacji wstecznej (backpropagation)** i **gr
 - Dla stabilności uczenia zastosowano **normalizację danych wejściowych i wyjściowych** (średnia = 0, odchylenie standardowe = 1),
 - Funkcja aktywacji `sigmoid` oraz jej pochodna zostały zaimplementowane ręcznie,
 - Zaimplementowano metodę `train()`, która wykonuje propagację w przód i wstecz przez określoną liczbę epok.
+
+
+## Testy i wyniki
+
+MSE
+| size | min | max |
+| -- | ------- | -------- |
+|  4 | 1.51e-05| 1.67e-03 |
+|  7 | 2.14e-05| 2.27e-04 |
+| 10 | 3.11e-04| 1.16e-02 |
+| 13 | 7.68e-05| 1.68e-04 |
+| 20 | 1.77e-04| 1.99e-04 |
+
+
+MAE
+| size | min | max |
+| - | --- | --- |
+|  4 | 1.51e-05 1.67e-03 |
+|  7 | 2.14e-05 2.27e-04 |
+| 10 | 3.11e-04 1.16e-02 |
+| 13 | 7.68e-05 1.68e-04 |
+| 20 | 1.77e-04 1.99e-04 |
+
+
+### Wykresy
+
+![](plots/normal_size=4.png)
+![](plots/normal_size=7.png)
+![](plots/normal_size=10.png)
+![](plots/normal_size=13.png)
+![](plots/normal_size=20.png)
+
+# PodsumowanieL

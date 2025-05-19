@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 def laplace(x, mu=0, b=1):
     return (1 / (2 * b)) * np.exp(-np.abs(x - mu) / b)
 
+def MSE(y_true, y_pred):
+    return np.mean((y_true - y_pred) ** 2)
+
+def MAE(y_true, y_pred):
+    return np.mean(np.abs(y_true - y_pred))
 
 class Perceptron_2_layers:
     def __init__(self, hidden_size):
@@ -39,8 +44,6 @@ class Perceptron_2_layers:
 
         return self.output
 
-    def MSE(self, y_true, y_pred):
-        return np.mean((y_true - y_pred) ** 2)
 
     def backward_propagation(self, x, y, learning_rate):
         output_error = self.output - y
@@ -56,8 +59,20 @@ class Perceptron_2_layers:
         self.weights_first_layer -= np.dot(x.T, delta_hidden) * learning_rate
         self.bias_first_layer -= (np.sum(delta_hidden, axis=0, keepdims=True)
                                   * learning_rate)
+        
+    def train_unnormalized(self, x, y, epochs, learning_rate, printing=True):
+        for epoch in range(epochs):
+            self.forward_propagation(x)
+            self.backward_propagation(x, y, learning_rate)
+            if printing and (epoch % 100) == 0:
+                mse = MSE(y, self.output)
+                mae = MAE(y, self.output)
+                print(f'Epoch {epoch}, MSE: {mse:.2e}, MAE: {mae:.2e}')
+    
+    def predict_unnormalized(self, x):
+        return self.forward_propagation(x)
 
-    def train(self, x, y, epochs, learning_rate):
+    def train(self, x, y, epochs, learning_rate, printing=True):
         # Normalize the input data
         self.x_mean = np.mean(x, axis=0)
         self.x_std = np.std(x, axis=0)
@@ -71,9 +86,10 @@ class Perceptron_2_layers:
         for epoch in range(epochs):
             self.forward_propagation(x_norm)
             self.backward_propagation(x_norm, y_norm, learning_rate)
-            if (epoch % 100) == 0:
-                mse = self.MSE(y_norm, self.output)
-                print(f'Epoch {epoch}, MSE: {mse}')
+            if printing and (epoch % 1000) == 0:
+                mse = MSE(y_norm, self.output)
+                mae = MAE(y_norm, self.output)
+                print(f'Epoch {epoch}, MSE: {mse:.2e}, MAE: {mae:.2e}')
 
     def predict(self, x):
         x_norm = (x - self.x_mean) / self.x_std
@@ -87,9 +103,9 @@ if __name__ == "__main__":
     x = np.linspace(-5, 5, 100).reshape(-1, 1)
     y = laplace(x).reshape(-1, 1)
 
-    hidden_size = 5
+    hidden_size = 10
     learning_rate = 0.01
-    epochs = 100000
+    epochs = 100_000
     model = Perceptron_2_layers(hidden_size)
     model.train(x, y, epochs, learning_rate)
 
