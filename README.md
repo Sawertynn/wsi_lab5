@@ -117,8 +117,10 @@ MAE
 
 # Podsumowanie
 
+Perceptron dwu warstwowy bardzo dobrze aproksymuje funkcję Laplace'a, już dla 4 neuronów na każdej warstwie wykres przewidywań jest zbliżony do oryginalnej funkcji.
+
 Normalizacja jest bardzo ważna, bez niej przy większych warstwach ukrytych warstwach jest ryzyko na problemy z liczeniem.
 
-Więcej neuronów dawało lepszy wynik w najgorszym wypadku i niewiele gorszy w wypadku najlepszym.
+Więcej neuronów dawało lepszy wynik w najgorszym wypadku i niewiele gorszy w wypadku najlepszym. Dla 20 neuronów widać jednak małe przeuczenie na wykresie.
 
 
