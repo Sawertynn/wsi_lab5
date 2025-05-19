@@ -58,6 +58,10 @@ Uczenie odbywa się za pomocą **propagacji wstecznej (backpropagation)** i **gr
 
 ## Testy i wyniki
 
+Dla każdego wybranego rozmiaru perceptron był testowany 5 razy, aby zminimalizować udział losowości przy przy tworzeniu sieci na początku.
+
+Wyniki błędów ze wszystkich prób:
+
 MSE
 | size | min | max |
 | -- | ------- | -------- |
@@ -70,7 +74,7 @@ MSE
 
 MAE
 | size | min | max |
-| - | --- | --- |
+| -- | ------- | -------- |
 |  4 | 1.51e-05 1.67e-03 |
 |  7 | 2.14e-05 2.27e-04 |
 | 10 | 3.11e-04 1.16e-02 |
@@ -78,7 +82,7 @@ MAE
 | 20 | 1.77e-04 1.99e-04 |
 
 
-### Wykresy
+### Wykresy (dla najlepszego wyniku)
 
 ![](plots/normal_size=4.png)
 ![](plots/normal_size=7.png)
@@ -86,4 +90,35 @@ MAE
 ![](plots/normal_size=13.png)
 ![](plots/normal_size=20.png)
 
-# PodsumowanieL
+
+### Porównanie z nieznormalizowanym
+
+Przy okazji przetestowaliśmy sieć przy trenowaniu bez normalizacji.
+Dla niewielu neuronów wyniki są dość dobre, ale im więcej tym większa szansa na problemy z wyliczaniem, i i model jest nieprzydatny.
+
+MSE
+| size | min | max |
+| -- | ------- | -------- |
+|  4 | 1.09e-04 | 2.01e-04 |
+|  7 | 3.20e-04 | 6.27e-03 |
+| 10 | nan | nan |
+| 13 | nan | nan |
+| 20 | nan | nan |
+
+MAE
+| size | min | max |
+| -- | ------- | -------- |
+|  4 | 1.09e-04 | 2.01e-04 |
+|  7 | 3.20e-04 | 6.27e-03 |
+| 10 | nan | nan |
+| 13 | nan | nan |
+| 20 | nan | nan |
+
+
+# Podsumowanie
+
+Normalizacja jest bardzo ważna, bez niej przy większych warstwach ukrytych warstwach jest ryzyko na problemy z liczeniem.
+
+Więcej neuronów dawało lepszy wynik w najgorszym wypadku i niewiele gorszy w wypadku najlepszym.
+
+

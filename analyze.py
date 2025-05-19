@@ -8,7 +8,6 @@ MAX_X = 8
 SAMPLE_COUNT = 100
 TRIES = 5
 EPOCHS = 50_000
-EPOCHS_LIST = [1_000, 10_000, 50_000]
 LEARNING_RATE = 0.01
 SIZES = [4, 7, 10, 13, 20]
 
@@ -39,7 +38,7 @@ def run_show(x, y, normalize=True):
                 y_pred_best = y_pred
                 best_mse = mae
             mses[hidden_size].append(float(mse))
-            maes[hidden_size].append(float(mse))
+            maes[hidden_size].append(float(mae))
             
 
         # plot the results
@@ -56,13 +55,23 @@ def run_show(x, y, normalize=True):
             plt.savefig(path)
     
     
+    print("mean square error")
+    print("| size | min | max |")
+    print("| -- | ------- | -------- |")
     for size in SIZES:
         vals = mses[size]
-        print(f'size: {size:2}, MSE: min {min(vals):.2e} max: {max(vals):.2e}')
+        print(f'| {size:2} | {min(vals):.2e} | {max(vals):.2e} |')
+
+    
+    
+    print("mean absolute error")
+    print("| size | min | max |")
+    print("| -- | ------- | -------- |")
     
     for size in SIZES:
         vals = maes[size]
-        print(f'size: {size:2}, MAE: min {min(vals):.2e} max: {max(vals):.2e}')
+        # print(f'size: {size:2}, MAE: min {min(vals):.2e} max: {max(vals):.2e}')
+        print(f'| {size:2} | {min(vals):.2e} | {max(vals):.2e} |')
 
 def main():
     x = np.linspace(MIN_X, MAX_X, SAMPLE_COUNT).reshape(-1, 1)
